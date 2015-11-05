@@ -1,0 +1,58 @@
+
+<html>
+<head>
+  <title>A Leaflet map!</title>
+  <link rel="stylesheet" href="leaflet.css"/>
+  <script src="leaflet.js"></script>
+  <style>
+    #map{ width: 900px; height: 500px; }
+  </style>
+</head>
+<body>
+  <div id="map"></div>
+  <script>
+ 
+
+  // https: also suppported.
+  var Esri_OceanBasemap = L.tileLayer('http://server.arcgisonline.com/ArcGIS/rest/services/Ocean_Basemap/MapServer/tile/{z}/{y}/{x}', {
+      attribution: 'Tiles &copy; Esri &mdash; Sources: GEBCO, NOAA, CHS, OSU, UNH, CSUMB, National Geographic, DeLorme, NAVTEQ, and Esri',
+      maxZoom: 13
+  });
+
+  // https: also suppported.
+  var OpenStreetMap_Mapnik = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+  });
+
+ 
+  // initialize the map
+  var map = L.map('map', {
+      center: [23.3, 58.5],
+      zoom: 10,
+      layers: [OpenStreetMap_Mapnik]
+  });
+    
+
+  var baseLayers = {
+      "open": OpenStreetMap_Mapnik,
+      "Esri": Esri_OceanBasemap
+  };
+
+  var overlayerMaps = {
+     // "wms": testtile
+  };
+     
+
+  // Add a layer control element to the map
+ // layerControl = L.control.layers(baseLayers, null, { position: 'topright' });
+  layerControl = L.control.layers(baseLayers, overlayerMaps, { position: 'topright' });
+  layerControl.addTo(map);
+
+  //L.control.layers(baseLayers, overlayerMaps).addTo(map).setPosition('topleft');
+  
+
+
+  </script>
+</body>
+</html>
